@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        .main-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4; /* Optional background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .timer-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: fit-content;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #countdown div {
+            margin: 5px;
+            font-size: 18px;
+            padding: 7px 15px;
+            background-color: #008000;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        span {
+            font-size: 18px;
+            color: #008000;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 600px) {
+            .timer-container {
+                padding: 15px;
+                width: 90%; /* Ensures it fits smaller screens */
+            }
+
+            #countdown div {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+
+            span {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .timer-container {
+                padding: 10px;
+            }
+
+            #countdown div {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            span {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="main-section">
+    <div class="timer-container">
+        <span>Time Remaining until February 10, 2025</span>
+        <div id="countdown">
+            <div id="days"></div>
+            <div id="hours"></div>
+            <div id="minutes"></div>
+            <div id="seconds"></div>
+        </div>
+    </div>
+   </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date("February 10, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance <= 0) {
+                document.getElementById("countdown").innerHTML = "The day has arrived!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = `Days: ${days}`;
+            document.getElementById("hours").textContent = `Hours: ${hours}`;
+            document.getElementById("minutes").textContent = `Minutes: ${minutes}`;
+            document.getElementById("seconds").textContent = `Seconds: ${seconds}`;
+        }
+
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Initial call to display countdown immediately
+        updateCountdown();
+    </script>
+</body>
+</html>
