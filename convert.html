@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/dist/dom-to-image.min.js"></script>
+
+</head>
+<body>
+    <div id="capture" style="width: 300px; height: 200px; background-color: lightblue; text-align: center; padding: 20px;">
+        <h1>Hello World</h1>
+        <p>This is a sample text to capture as an image.</p>
+      </div>
+      <button id="capture-btn">Capture as Image</button>
+      <script>
+        document.getElementById("capture-btn").addEventListener("click", function () {
+          const element = document.getElementById("capture");
+      
+          domtoimage.toPng(element).then((dataUrl) => {
+            // Create a download link
+            const link = document.createElement("a");
+            link.href = dataUrl;
+            link.download = "captured-image.png";
+            link.click();
+          }).catch((error) => {
+            console.error("Error capturing the image:", error);
+          });
+        });
+      </script>
+      
+      
+</body>
+</html>
